@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<h2 class="text-center mt-4">📊 Admin Dashboard</h2>
+<h2 class="text-center mt-4">👩‍🎓 Welcome, {{request.session.student_name }} {{request.session.admin_name }}</h2>
+<div class="container mt-5">
+  <div class="row text-center">
+    <div class="col-md-4">
+      <div class="card shadow p-3 mb-5 bg-white rounded">
+        <h4>Total Books</h4>
+        <p>{{ total_books }}</p>
+        <a href="{% url 'app:book_list' %}" class="btn btn-primary btn-sm">View Books</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow p-3 mb-5 bg-white rounded">
+        <h4>Total Students</h4>
+        <p>{{ total_students }}</p>
+        <a href="{% url 'app:student_list' %}" class="btn btn-secondary btn-sm">View Students</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow p-3 mb-5 bg-white rounded">
+        <h4>Add New Book</h4>
+        <p>Quickly add a new book</p>
+        <a href="{% url 'app:add_book' %}" class="btn btn-success btn-sm">Add Book</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Library Home{% endblock %}
+
+{% block content %}
+<style>
+  body {
+    background: #f8f9fa;
+  }
+
+  .welcome-section {
+    padding: 60px 20px;
+    text-align: center;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: white;
+    border-radius: 12px;
+    margin-bottom: 40px;
+  }
+
+  .welcome-section h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+  }
+
+  .action-buttons a {
+    width: 180px;
+    margin: 10px;
+  }
+
+  .dashboard-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+</style>
+
+<div class="container mt-5">
+  <div class="welcome-section shadow">
+    <h1>📚 Welcome to the Library Management System</h1>
+    <p class="lead mt-3">Easily manage books, users, and explore our digital collection.</p>
+  </div>
+
+  <div class="dashboard-actions action-buttons mt-5">
+    
+    {% if request.session.user_role == 'admin' %}
+    <a href="{% url 'app:admin_dashboard' %}" class="btn btn-outline-light bg-primary">📖 Manage Books</a>
+    <a href="{% url 'app:add_book' %}" class="btn btn-outline-light bg-success">➕ Add Book</a>
+    <a href="{% url 'app:admin_logout' %}" class="btn btn-outline-light bg-danger">🚪 Logout</a>
+
+  {% elif request.session.user_role == 'student' %}
+    <a href="{% url 'app:student_dashboard' %}" class="btn btn-outline-light bg-primary">📚 View Books</a>
+    <a href="{% url 'app:student_logout' %}" class="btn btn-outline-light bg-danger">🚪 Logout</a>
+
+  {% else %}
+    <a href="{% url 'app:admin_login' %}" class="btn btn-outline-dark bg-primary text-white">🔐 Admin Login</a>
+    <a href="{% url 'app:student_login' %}" class="btn btn-outline-dark bg-secondary text-white">🎓 Student Login</a>
+  {% endif %}
+  </div>
+</div>
+{% endblock %}

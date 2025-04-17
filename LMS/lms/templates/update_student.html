@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}{% if student %}Update{% else %}Add{% endif %} Student{% endblock %}
+
+{% block content %}
+<style>
+  .form-wrapper {
+    max-width: 600px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  }
+  .form-wrapper h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 600;
+  }
+</style>
+
+<div class="form-wrapper">
+  <h2>{% if student %}✏️ Update Student{% else %}➕ Add Student{% endif %}</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label>Name</label>
+      <input type="text" name="name" class="form-control" value="{{ student.name}}" >
+    </div>
+    <div class="mb-3">
+      <label>Email</label>
+      <input type="email" name="email" class="form-control" value="{{ student.email }}" >
+    </div>
+    <div class="mb-3">
+      <label>Roll Number</label>
+      <input type="number" name="roll_number" class="form-control" value="{{ student.roll_number}}" >
+    </div>
+    <div class="mb-3">
+      <label>Division</label>
+      <input type="text" name="std_div" class="form-control" value="{{ student.std_div}}" >
+    </div>
+    <div class="mb-3">
+        <label>Added By</label>
+        <input type="text" name="added_by" class="form-control" value="{{ student.added_by}}" >
+      </div>
+
+    <div class="mb-3">
+      <label>Password</label>
+      <input type="password" name="password" value="{{ student.password }}" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">
+      {% if student %}Update Student{% else %}Add Student{% endif %}
+    </button>
+  </form>
+</div>
+{% endblock %}

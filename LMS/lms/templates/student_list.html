@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Student List{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="text-center mb-4">🎓 Registered Students</h2>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover bg-white shadow-sm">
+      <thead class="table-light">
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Roll Number</th>
+          <th>Division</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in students %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ student.name }}</td>
+          <td>{{ student.email }}</td>
+          <td>{{ student.roll_number }}</td>
+          <td>{{ student.std_div }}</td>
+          <td>
+            <a href="{% url 'app:add_student' %}" class="btn btn-sm btn-warning">Add</a>
+            <a href="{% url 'app:update_student' student.id %}" class="btn btn-sm btn-warning">Edit</a>
+            <a href="{% url 'app:delete_student' student.id %}" class="btn btn-sm btn-danger"
+               onclick="return confirm('Are you sure you want to delete this student?');">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="6" class="text-center text-muted">No students found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

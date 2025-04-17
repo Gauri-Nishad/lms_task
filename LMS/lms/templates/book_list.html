@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Book List{% endblock %}
+
+{% block content %}
+<style>
+  .book-list-table {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    padding: 20px;
+  }
+  .book-list-table thead {
+    background-color: #f8f9fa;
+  }
+  .book-list-table th {
+    text-align: center;
+  }
+  .book-list-table td {
+    vertical-align: middle;
+  }
+</style>
+
+<div class="container mt-4">
+  <h2 class="text-center mb-4">📚 Book List</h2>
+
+  <div class="book-list-table table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>ISBN</th>
+          <th>Category</th>
+          <th>Published Date</th>
+          {% comment %} {% if request.session.user_role == 'admin' %} {% endcomment %}
+          <th>Actions</th>
+          {% comment %} {% endif %} {% endcomment %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for book in books %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.isbn }}</td>
+          <td>{{ book.category }}</td>
+          <td>{{ book.published_date }}</td>
+         
+          <td class="text-center">
+            <a href="{% url 'app:add_book' %}" class="btn btn-sm btn-warning">Add Book</a>
+            <a href="{% url 'app:update_book' book.id %}" class="btn btn-sm btn-warning">Edit</a>
+            <a href="{% url 'app:delete_book' book.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this book?');">Delete</a>
+          </td>
+         
+        </tr>
+      
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
