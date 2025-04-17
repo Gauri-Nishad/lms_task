@@ -12,8 +12,8 @@ Follow these steps to get the project running locally:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/library-management-system.git
-cd library-management-system
+git clone https://github.com/Gauri-Nishad/lms_task.git
+cd lms_task
 
 2. Create and Activate a Virtual Environment
 python -m venv lmsenv
